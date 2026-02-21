@@ -51,6 +51,9 @@ def format_help() -> str:
         "\U0001f916 goldiReminder — Abfuhrkalender\n\n"
         "/naechste — Nächster Abfuhrtermin\n"
         "/woche — Abfuhrtermine diese Woche\n"
-        "/hilfe — Diese Hilfe\n\n"
+        "/hilfe — Diese Hilfe\n"
+        "/start — Benachrichtigungen aktivieren\n"
+        "/stop — Benachrichtigungen deaktivieren\n"
+        "/test — Testnachricht senden (nur Eigentümer)\n\n"
         "Benachrichtigungen kommen automatisch um 19 Uhr am Abend vor einem Abfuhrtermin."
     )

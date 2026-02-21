@@ -6,9 +6,10 @@ from apscheduler.triggers.cron import CronTrigger
 from telegram.ext import Application, CommandHandler
 
 from awb import refresh_cache
-from commands import hilfe_handler, naechste_handler, woche_handler
+from commands import hilfe_handler, naechste_handler, start_handler, stop_handler, test_handler, woche_handler
 from config import SCHEDULE_HOUR, SCHEDULE_MINUTE, TELEGRAM_BOT_TOKEN, TIMEZONE
 from notifications import check_and_notify
+from users import seed_owner
 
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -21,6 +22,7 @@ scheduler = AsyncIOScheduler(timezone=tz)
 
 
 async def on_startup(application: Application) -> None:
+    seed_owner()
     logger.info("Refreshing AWB calendar cache on startup...")
     try:
         refresh_cache()
@@ -67,6 +69,9 @@ def main() -> None:
     app.add_handler(CommandHandler("naechste", naechste_handler))
     app.add_handler(CommandHandler("woche", woche_handler))
     app.add_handler(CommandHandler("hilfe", hilfe_handler))
+    app.add_handler(CommandHandler("start", start_handler))
+    app.add_handler(CommandHandler("stop", stop_handler))
+    app.add_handler(CommandHandler("test", test_handler))
 
     app.run_polling(drop_pending_updates=True)
 
