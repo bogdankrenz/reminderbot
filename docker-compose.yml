@@ -1,0 +1,9 @@
+services:
+  goldi-reminder:
+    build: .
+    container_name: goldi-reminder
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
